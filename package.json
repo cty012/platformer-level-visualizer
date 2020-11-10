@@ -4,6 +4,7 @@
   "description": "A visualizer for levels of the game Platformer 2",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/cty012/platformer-level-visualizer/issues"
   },
-  "homepage": "https://github.com/cty012/platformer-level-visualizer#readme"
+  "homepage": "https://github.com/cty012/platformer-level-visualizer#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
 }
