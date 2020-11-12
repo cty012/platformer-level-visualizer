@@ -38,26 +38,28 @@ function updateMap(map_data) {
 
 function getPlayerHTML(player_data) {
     var style = `
-        left: ${player_data["pos"][0]};
-        top: ${player_data["pos"][1]};
-        width: ${player_data["size"][0]};
-        height: ${player_data["size"][1]};
+        left: ${player_data["pos"][0]}px;
+        top: ${player_data["pos"][1]}px;
+        width: ${player_data["size"][0]}px;
+        height: ${player_data["size"][1]}px;
+        line-height: ${player_data["size"][1]}px;
         background-color: rgb(${player_data["color"]});
     `;
-    return `<div id="player" class="player abs" style="${style}"></div>`;
+    return `<div id="player" class="obj player abs" style="${style}">player</div>`;
 }
 
 function getStaticHTML(static_data, type) {
     var html = ``;
     static_data.forEach(static => {
         var style = `
-            left: ${static["pos"][0]};
-            top: ${static["pos"][1]};
-            width: ${static["size"][0]};
-            height: ${static["size"][1]};
+            left: ${static["pos"][0]}px;
+            top: ${static["pos"][1]}px;
+            width: ${static["size"][0]}px;
+            height: ${static["size"][1]}px;
+            line-height: ${static["size"][1]}px;
             background-color: rgb(${static["color"]});
         `;
-        html += `<div id="${static["name"]}" class="${type} abs" style="${style}"></div>`;
+        html += `<div id="${static["name"]}" class="obj ${type} abs" style="${style}">${static["name"]}</div>`;
     });
     return html;
 }
@@ -66,13 +68,14 @@ function getMovableHTML(movable_data, type) {
     var html = ``;
     movable_data.forEach(movable => {
         var style = `
-            left: ${movable["track"][0]["pos"][0]};
-            top: ${movable["track"][0]["pos"][1]};
-            width: ${movable["size"][0]};
-            height: ${movable["size"][1]};
+            left: ${movable["track"][0]["pos"][0]}px;
+            top: ${movable["track"][0]["pos"][1]}px;
+            width: ${movable["size"][0]}px;
+            height: ${movable["size"][1]}px;
+            line-height: ${movable["size"][1]}px;
             background-color: rgb(${movable["color"]});
         `;
-        html += `<div id="${movable["name"]}" class="${type} abs" style="${style}"></div>`;
+        html += `<div id="${movable["name"]}" class="obj ${type} abs" style="${style}">${movable["name"]}</div>`;
     });
     return html;
 }
