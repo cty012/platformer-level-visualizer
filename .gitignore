@@ -5,3 +5,5 @@
 .ebignore
 
 node_modules
+
+public/resources/index.json
