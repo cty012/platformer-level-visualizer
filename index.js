@@ -20,8 +20,8 @@ var jsonReader = new json_reader.JSONReader(path.join(__dirname, "/public/resour
 // Deal with GET request
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "/public/views/index.html"));
-})
+});
 
 app.get("/json", (req, res) => {
     res.json(jsonReader.read());
-})
+});

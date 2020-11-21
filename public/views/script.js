@@ -1,4 +1,5 @@
 const xhttp = window.XMLHttpRequest? new XMLHttpRequest() : new ActiveXObject();
+var showName = true;
 
 window.onload = () => {
     requestData("/json", json_data => {
@@ -38,14 +39,14 @@ function updateMap(map_data) {
 
 function getPlayerHTML(player_data) {
     var style = `
-        left: ${player_data["pos"][0]}px;
-        top: ${player_data["pos"][1]}px;
+        left: ${player_data["pos"][0][0]}px;
+        top: ${player_data["pos"][0][1]}px;
         width: ${player_data["size"][0]}px;
         height: ${player_data["size"][1]}px;
         line-height: ${player_data["size"][1]}px;
         background-color: rgb(${player_data["color"]});
     `;
-    return `<div id="player" class="obj player abs" style="${style}">player</div>`;
+    return `<div id="player" class="obj player abs" style="${style}">${showName? "player" : ""}</div>`;
 }
 
 function getStaticHTML(static_data, type) {
@@ -59,7 +60,7 @@ function getStaticHTML(static_data, type) {
             line-height: ${static["size"][1]}px;
             background-color: rgb(${static["color"]});
         `;
-        html += `<div id="${static["name"]}" class="obj ${type} abs" style="${style}">${static["name"]}</div>`;
+        html += `<div id="${static["name"]}" class="obj ${type} abs" style="${style}">${showName? static["name"] : ""}</div>`;
     });
     return html;
 }
@@ -75,7 +76,7 @@ function getMovableHTML(movable_data, type) {
             line-height: ${movable["size"][1]}px;
             background-color: rgb(${movable["color"]});
         `;
-        html += `<div id="${movable["name"]}" class="obj ${type} abs" style="${style}">${movable["name"]}</div>`;
+        html += `<div id="${movable["name"]}" class="obj ${type} abs" style="${style}">${showName? movable["name"] : ""}</div>`;
     });
     return html;
 }
