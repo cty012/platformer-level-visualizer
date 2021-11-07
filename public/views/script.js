@@ -2,22 +2,17 @@ const xhttp = window.XMLHttpRequest? new XMLHttpRequest() : new ActiveXObject();
 var showName = true;
 
 window.onload = () => {
-    requestData("/json", json_data => {
-        updateMap(JSON.parse(json_data));
-    });
-    setInterval(() => {
-        requestData("/json", json_data => {
-            updateMap(JSON.parse(json_data));
-        });
-    }, 1000);
+    setTimeout(initDropdown(), 100);
+    setInterval(dropdownChange, 1000);
 }
 
 function requestData(url, callback) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            console.log(xhttp.responseText)
             callback(xhttp.responseText);
         }
-    };
+    }
     xhttp.open("GET", url);
     xhttp.send();
 }
@@ -82,5 +77,28 @@ function getMovableHTML(movable_data, type) {
 }
 
 function rgb(color) {
-    return `rgb(${rgbToHex(color[0])}${rgbToHex(color[1])}${rgbToHex(color[2])})`
+    return `rgb(${rgbToHex(color[0])}${rgbToHex(color[1])}${rgbToHex(color[2])})`;
+}
+
+// dropdown
+function initDropdown() {
+    dropdown = document.getElementById("dropdown");
+    dropdown.innerHTML = "";
+    requestData("/files", json_data => {
+        JSON.parse(json_data).forEach(file => {
+            console.log(file);
+            dropdown.innerHTML += `<option value=${file}>${file}</option>`;
+        });
+    });
+}
+
+function current() {
+    let currentValue = document.getElementById("dropdown").value;
+    return currentValue.length > 0 ? currentValue : "index";
+}
+
+function dropdownChange() {
+    requestData(`/json/${current()}`, json_data => {
+        updateMap(JSON.parse(json_data));
+    });
 }
